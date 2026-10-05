@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATELIER ÉLÉONORE | Handcrafted Haute Couture & Bespoke Tailoring</title>
+  
+  <!-- Google Fonts for Luxury Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Luxury Boutique Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#FBF9F5] text-[#1C1A17] antialiased selection:bg-[#C5A059] selection:text-white">
+
+  <!-- ==========================================================================
+       TOP ANNOUNCEMENT BAR & CURRENCY PICKER
+       ========================================================================== -->
+  <aside class="announcement-bar">
+    <div class="hidden md:flex items-center gap-2">
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#DFBE7B] animate-pulse"></span>
+      <span>Handcrafted with Slow-Fashion Artistry</span>
+    </div>
+    <div class="text-center flex-1 md:flex-initial">
+      <span>✨ Complimentary Insured Express Shipping over $200 | Code: <strong>MAISON10</strong></span>
+    </div>
+    <div class="flex items-center gap-4">
+      <!-- Currency Switcher -->
+      <label for="currencySelector" class="sr-only">Currency</label>
+      <select id="currencySelector" class="bg-stone-900 text-[#DFBE7B] border border-stone-800 text-xs px-2 py-0.5 rounded cursor-pointer focus:outline-none">
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="INR">INR (₹)</option>
+      </select>
+      <button onclick="openDesignerStudio()" class="hidden sm:inline-flex items-center gap-1 text-[#DFBE7B] hover:text-white transition font-medium">
+        <span>👑</span> Designer Studio
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MAIN NAVIGATION BAR (STICKY)
+       ========================================================================== -->
+  <header class="header-sticky">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Mobile Menu Toggle Button -->
+      <button onclick="toggleMobileNav()" class="md:hidden p-2 text-stone-800 hover:text-[#C5A059]" aria-label="Toggle Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="#hero" class="text-center group">
+        <span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest uppercase block text-stone-900 group-hover:text-[#C5A059] transition">
+          Atelier Éléonore
+        </span>
+        <span class="text-[9px] uppercase tracking-[0.28em] text-stone-500 block font-sans -mt-0.5">
+          Handmade Haute Couture & Bespoke
+        </span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-[0.14em] text-stone-700">
+        <a href="#collection" class="hover:text-[#C5A059] transition">Creations</a>
+        <a href="#atelier" class="hover:text-[#C5A059] transition">The Atelier</a>
+        <a href="#bespoke" class="hover:text-[#C5A059] transition">Bespoke Studio</a>
+        <a href="#lookbook" class="hover:text-[#C5A059] transition">Lookbook</a>
+        <a href="#reviews" class="hover:text-[#C5A059] transition">Client Love</a>
+      </nav>
+
+      <!-- Header Action Icons -->
+      <div class="flex items-center gap-4">
+        <!-- Live Search Trigger -->
+        <a href="#collection" class="p-2 text-stone-700 hover:text-[#C5A059] transition" title="Search Creations" aria-label="Search">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </a>
+
+        <!-- Wishlist Button -->
+        <button onclick="scrollToCollection()" class="relative p-2 text-stone-700 hover:text-[#C5A059] transition" title="Wishlist" aria-label="Wishlist">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+          </svg>
+          <span id="wishlistCount" class="hidden absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-[#B86B5A] text-white text-[10px] font-bold flex items-center justify-center">0</span>
+        </button>
+
+        <!-- Cart Bag Button -->
+        <button onclick="openCartDrawer()" class="relative p-2 text-stone-900 hover:text-[#C5A059] transition" title="Shopping Bag" aria-label="Shopping Bag">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+          </svg>
+          <span id="cartCount" class="hidden absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-[#C5A059] text-stone-950 text-[10px] font-bold flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobileNavMenu" class="hidden md:hidden bg-[#FAF6F0] border-b border-stone-200 px-6 py-4 space-y-3 text-xs uppercase tracking-widest font-semibold">
+      <a href="#collection" onclick="toggleMobileNav()" class="block py-1 hover:text-[#C5A059]">Creations</a>
+      <a href="#atelier" onclick="toggleMobileNav()" class="block py-1 hover:text-[#C5A059]">The Atelier</a>
+      <a href="#bespoke" onclick="toggleMobileNav()" class="block py-1 hover:text-[#C5A059]">Bespoke Studio</a>
+      <a href="#lookbook" onclick="toggleMobileNav()" class="block py-1 hover:text-[#C5A059]">Lookbook</a>
+      <a href="#reviews" onclick="toggleMobileNav()" class="block py-1 hover:text-[#C5A059]">Client Love</a>
+      <button onclick="toggleMobileNav(); openDesignerStudio();" class="block py-1 text-[#A37F39]">👑 Open Designer Studio</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION: EDITORIAL HIGH-FASHION SHOWCASE
+         ========================================================================== -->
+    <section id="hero" class="relative overflow-hidden pt-12 pb-20 md:py-28 bg-gradient-to-b from-[#F7F2EB] to-[#FBF9F5]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Editorial Copy Column -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/80 border border-stone-200 rounded-full text-[11px] uppercase tracking-widest text-stone-700 backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-[#C5A059]"></span>
+              Handcrafted in Limited Atelier Editions
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-stone-950 font-normal leading-[1.12]">
+              Wearable Poetry, <br>
+              <span class="italic font-light gold-gradient-text">Stitched Completely by Hand.</span>
+            </h1>
+
+            <p class="text-stone-600 text-sm sm:text-base leading-relaxed max-w-xl font-light">
+              Step inside an intimate fashion atelier where slow craft meets sculptural silhouettes. Each garment is meticulously drafted, hand-pleated, and embroidered with heirloom silks, natural linens, and 40+ hours of devoted human needlework.
+            </p>
+
+            <div class="pt-2 flex flex-wrap gap-4 items-center">
+              <a href="#collection" class="btn-primary">
+                <span>Explore Creations</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+              <a href="#bespoke" class="btn-secondary">
+                <span>Bespoke Commission</span>
+              </a>
+            </div>
+
+            <!-- Pillars Bar -->
+            <div class="pt-8 border-t border-stone-200/80 grid grid-cols-3 gap-4">
+              <div>
+                <span class="font-serif text-xl sm:text-2xl font-bold text-stone-900 block">100%</span>
+                <span class="text-[11px] text-stone-500 uppercase tracking-wider block">Ethical Heirloom Silks</span>
+              </div>
+              <div>
+                <span class="font-serif text-xl sm:text-2xl font-bold text-stone-900 block">40+ Hrs</span>
+                <span class="text-[11px] text-stone-500 uppercase tracking-wider block">Handcrafting per Piece</span>
+              </div>
+              <div>
+                <span class="font-serif text-xl sm:text-2xl font-bold text-stone-900 block">Custom</span>
+                <span class="text-[11px] text-stone-500 uppercase tracking-wider block">Made-to-Measure Free</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editorial Imagery Split Column -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md">
+              <!-- Main Feature Image -->
+              <div class="rounded-sm overflow-hidden shadow-2xl border-4 border-white bg-stone-100 relative group aspect-[3/4]">
+                <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=80" 
+                     alt="Haute Couture Handcrafted Gown" 
+                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                <div class="absolute bottom-4 left-4 right-4 bg-stone-900/85 backdrop-blur-md p-4 text-white rounded text-xs">
+                  <span class="text-[10px] uppercase tracking-widest text-[#DFBE7B] block font-semibold">Featured Couture</span>
+                  <div class="flex justify-between items-center mt-1">
+                    <span class="font-serif text-base font-medium">Aura Silk Organza Gown</span>
+                    <button onclick="openProductModal('couture-01')" class="text-xs text-[#DFBE7B] underline hover:text-white">View Details</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Overlapping Detail Card -->
+              <div class="hidden sm:block absolute -bottom-6 -left-8 bg-white/95 backdrop-blur-md border border-stone-200 p-4 rounded shadow-lg max-w-[210px]">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                  <span class="text-[10px] font-semibold uppercase tracking-wider text-stone-800">Slow Fashion</span>
+                </div>
+                <p class="text-[11px] text-stone-500 leading-tight">Zero mass-production. Stitched by hand specifically for you.</p>
+              </div>
+
+              <!-- Artisan Badge -->
+              <div class="absolute -top-4 -right-4 bg-[#C5A059] text-stone-950 font-serif text-center px-4 py-3 rounded shadow-lg rotate-3">
+                <span class="text-[10px] font-sans font-bold tracking-widest uppercase block">Handmade</span>
+                <span class="text-sm font-bold block">Artisan Label</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         THE ATELIER STORY & CRAFTSMANSHIP
+         ========================================================================== -->
+    <section id="atelier" class="py-20 bg-stone-900 text-stone-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-xs uppercase tracking-[0.2em] text-[#DFBE7B] font-semibold block mb-2">The Atelier Philosophy</span>
+          <h2 class="font-serif text-3xl sm:text-4xl text-white font-normal">
+            Where Modern Couture Meets Heritage Handcraft
+          </h2>
+          <div class="w-12 h-0.5 bg-[#C5A059] mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Step 1 -->
+          <div class="p-6 rounded bg-stone-800/60 border border-stone-700/60 hover:border-[#C5A059] transition group">
+            <span class="font-serif text-3xl text-[#DFBE7B] block mb-3 font-light">01</span>
+            <h3 class="font-serif text-lg font-semibold text-white mb-2">The Draping Sketch</h3>
+            <p class="text-xs text-stone-400 leading-relaxed font-light">
+              Every design begins with organic freehand draping directly on dressmaker forms, celebrating sculptural fluid motion.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="p-6 rounded bg-stone-800/60 border border-stone-700/60 hover:border-[#C5A059] transition group">
+            <span class="font-serif text-3xl text-[#DFBE7B] block mb-3 font-light">02</span>
+            <h3 class="font-serif text-lg font-semibold text-white mb-2">Artisanal Needlework</h3>
+            <p class="text-xs text-stone-400 leading-relaxed font-light">
+              Traditional French seams, hand-rolled hems, antique zardozi wires, and hand-strung freshwater pearl beadwork.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="p-6 rounded bg-stone-800/60 border border-stone-700/60 hover:border-[#C5A059] transition group">
+            <span class="font-serif text-3xl text-[#DFBE7B] block mb-3 font-light">03</span>
+            <h3 class="font-serif text-lg font-semibold text-white mb-2">Heirloom Textiles</h3>
+            <p class="text-xs text-stone-400 leading-relaxed font-light">
+              Sourced directly from certified heritage silk mills and Belgian organic flax weavers. 100% biodegradable luxury.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="p-6 rounded bg-stone-800/60 border border-stone-700/60 hover:border-[#C5A059] transition group">
+            <span class="font-serif text-3xl text-[#DFBE7B] block mb-3 font-light">04</span>
+            <h3 class="font-serif text-lg font-semibold text-white mb-2">Made-to-Measure</h3>
+            <p class="text-xs text-stone-400 leading-relaxed font-light">
+              No generic standard charts. Every garment can be cut to your specific bust, waist, hips, and height measurements.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SHOP & PRODUCT CATALOG
+         ========================================================================== -->
+    <section id="collection" class="py-20 bg-[#FBF9F5]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header & Category Tabs -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-stone-200">
+          <div>
+            <span class="text-xs uppercase tracking-[0.2em] text-[#A37F39] font-semibold block mb-1">Handmade Catalog</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-stone-900 font-normal">
+              The Current Atelier Collection
+            </h2>
+          </div>
+
+          <!-- Search and Sort Controls -->
+          <div class="flex flex-wrap items-center gap-3">
+            <!-- Search -->
+            <div class="relative">
+              <label for="searchInput" class="sr-only">Search creations</label>
+              <input type="text" id="searchInput" placeholder="Search creations, fabrics..." 
+                     class="bg-white border border-stone-300 rounded px-3 py-1.5 pl-8 text-xs focus:outline-none focus:border-[#C5A059] w-48 sm:w-56" />
+              <svg class="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+            </div>
+
+            <!-- Sort -->
+            <label for="sortSelector" class="sr-only">Sort by</label>
+            <select id="sortSelector" class="bg-white border border-stone-300 rounded px-2.5 py-1.5 text-xs text-stone-700 focus:outline-none focus:border-[#C5A059] cursor-pointer">
+              <option value="featured">Featured Editions</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Top Rated by Clients</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+          <button class="category-tab-btn active-cat px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border border-stone-300 whitespace-nowrap transition" data-category="All Creations">All Creations</button>
+          <button class="category-tab-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border border-stone-300 whitespace-nowrap transition" data-category="Couture Gowns">Couture Gowns</button>
+          <button class="category-tab-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border border-stone-300 whitespace-nowrap transition" data-category="Co-Ords & Sets">Co-Ords & Sets</button>
+          <button class="category-tab-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border border-stone-300 whitespace-nowrap transition" data-category="Outerwear & Jackets">Outerwear & Jackets</button>
+          <button class="category-tab-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border border-stone-300 whitespace-nowrap transition" data-category="Scarves & Shawls">Scarves & Shawls</button>
+          <button class="category-tab-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border border-stone-300 whitespace-nowrap transition" data-category="Accessories">Accessories</button>
+        </div>
+
+        <!-- Products Grid (Dynamically Populated by app.js) -->
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <!-- Rendered via renderProducts() -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BESPOKE COMMISSIONS & CUSTOM MEASUREMENT TAILORING
+         ========================================================================== -->
+    <section id="bespoke" class="py-20 bg-[#F4EFEB] border-t border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-5 space-y-6">
+            <span class="text-xs uppercase tracking-[0.2em] text-[#A37F39] font-semibold block">Private Commissions</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-stone-900 font-normal">
+              Dreaming of a One-of-a-Kind Custom Creation?
+            </h2>
+            <p class="text-sm text-stone-600 leading-relaxed font-light">
+              Whether you are preparing for your wedding ceremony, a gala evening, or desire a garment drafted specifically around your posture and personal textile choices, our designer works directly with you.
+            </p>
+            
+            <div class="space-y-3 pt-2 text-xs text-stone-700">
+              <div class="flex items-center gap-3">
+                <span class="w-5 h-5 rounded-full bg-[#C5A059] text-stone-950 flex items-center justify-center font-bold text-[10px]">1</span>
+                <span>One-on-One Virtual or In-Person Design Consultation</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="w-5 h-5 rounded-full bg-[#C5A059] text-stone-950 flex items-center justify-center font-bold text-[10px]">2</span>
+                <span>Fabric Swatches & Illustrated Silhouette Drafts Mailed to You</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="w-5 h-5 rounded-full bg-[#C5A059] text-stone-950 flex items-center justify-center font-bold text-[10px]">3</span>
+                <span>Toile Fitting Mockup & Hand-Embroidered Final Creation</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bespoke Consultation Form -->
+          <div class="lg:col-span-7 bg-white p-8 sm:p-10 rounded-sm shadow-md border border-stone-200">
+            <h3 class="font-serif text-2xl font-semibold text-stone-900 mb-1">Book an Atelier Consultation</h3>
+            <p class="text-xs text-stone-500 mb-6 font-light">Fill out your dream vision and our designer will respond within 24 hours.</p>
+
+            <form onsubmit="submitBespokeInquiry(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="bespokeName">Your Full Name</label>
+                  <input type="text" id="bespokeName" required placeholder="Lady Eleanor Vance" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="bespokeEmail">Email Address</label>
+                  <input type="email" id="bespokeEmail" required placeholder="eleanor@example.com" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="bespokeOccasion">Occasion / Event</label>
+                  <select id="bespokeOccasion" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059] cursor-pointer">
+                    <option>Bridal / Wedding Gown</option>
+                    <option>Gala / Red Carpet Evening</option>
+                    <option>Cocktail & Reception Co-Ord</option>
+                    <option>Traditional / Cultural Handwork</option>
+                    <option>Everyday Bespoke Luxury</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="bespokeBudget">Target Budget</label>
+                  <select id="bespokeBudget" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059] cursor-pointer">
+                    <option>$250 - $500 (Pret-a-Porter Co-Ord / Stole)</option>
+                    <option>$500 - $1,000 (Artisan Evening Gown)</option>
+                    <option>$1,000 - $2,500 (Heirloom Bridal / Tapestry)</option>
+                    <option>$2,500+ (Haute Couture Masterpiece)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="bespokeNotes">Vision & Measurement Notes (Optional)</label>
+                <textarea id="bespokeNotes" rows="3" placeholder="Describe your preferred silhouettes, colors, neckline, or specific measurements..." class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]"></textarea>
+              </div>
+
+              <button type="submit" class="w-full btn-gold">
+                Send Bespoke Inquiry to Designer ✨
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         EDITORIAL LOOKBOOK GALLERY
+         ========================================================================== -->
+    <section id="lookbook" class="py-20 bg-[#FBF9F5]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-[0.2em] text-[#A37F39] font-semibold block mb-1">Spring-Summer Lookbook</span>
+          <h2 class="font-serif text-3xl sm:text-4xl text-stone-900 font-normal">Living the Handcrafted Aesthetic</h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="overflow-hidden rounded group aspect-[3/4] relative">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="Couture Runway" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+            <div class="absolute inset-0 bg-stone-950/40 opacity-0 group-hover:opacity-100 transition flex items-end p-4 text-white text-xs font-serif">
+              <span>Collection 'Lumière' Act I</span>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded group aspect-[3/4] relative">
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80" alt="Embroidered Corset" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+            <div class="absolute inset-0 bg-stone-950/40 opacity-0 group-hover:opacity-100 transition flex items-end p-4 text-white text-xs font-serif">
+              <span>Golden Zardozi Needlecraft</span>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded group aspect-[3/4] relative">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=80" alt="Belgian Flax Suit" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+            <div class="absolute inset-0 bg-stone-950/40 opacity-0 group-hover:opacity-100 transition flex items-end p-4 text-white text-xs font-serif">
+              <span>Organic Raw Linen</span>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded group aspect-[3/4] relative">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=80" alt="Bias Cut Evening Silk" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+            <div class="absolute inset-0 bg-stone-950/40 opacity-0 group-hover:opacity-100 transition flex items-end p-4 text-white text-xs font-serif">
+              <span>Ophelia Silk Charmeuse</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CLIENT REVIEWS & TESTIMONIALS
+         ========================================================================== -->
+    <section id="reviews" class="py-20 bg-stone-100/60 border-t border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-[0.2em] text-[#A37F39] font-semibold block mb-1">Client Accolades</span>
+          <h2 class="font-serif text-3xl sm:text-4xl text-stone-900 font-normal">Praise from Discerning Patrons</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="p-6 bg-white rounded shadow-sm border border-stone-200 flex flex-col justify-between">
+            <p class="font-serif italic text-sm text-stone-700 leading-relaxed mb-6">
+              "The Aura Silk gown exceeded every couture dress I have ever purchased on 5th Avenue. The hand-pleating is an architectural marvel and having the designer tailor it to my exact height was a dream."
+            </p>
+            <div class="flex items-center gap-3 pt-4 border-t border-stone-100">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" class="w-10 h-10 rounded-full object-cover" alt="Clara Vance" />
+              <div>
+                <h4 class="font-serif font-bold text-xs text-stone-900">Clara Vance</h4>
+                <span class="text-[10px] text-stone-500 uppercase tracking-wider">New York • Gala Patron</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 bg-white rounded shadow-sm border border-stone-200 flex flex-col justify-between">
+            <p class="font-serif italic text-sm text-stone-700 leading-relaxed mb-6">
+              "I commissioned a custom bespoke bridal jacket with zardozi embroidery. The craftsmanship, the communication, and the weight of the silk were absolute perfection. Everyone at my reception was captivated."
+            </p>
+            <div class="flex items-center gap-3 pt-4 border-t border-stone-100">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" class="w-10 h-10 rounded-full object-cover" alt="Aanya Sharma" />
+              <div>
+                <h4 class="font-serif font-bold text-xs text-stone-900">Aanya Sharma</h4>
+                <span class="text-[10px] text-stone-500 uppercase tracking-wider">London • Bride</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 bg-white rounded shadow-sm border border-stone-200 flex flex-col justify-between">
+            <p class="font-serif italic text-sm text-stone-700 leading-relaxed mb-6">
+              "True slow-fashion couture. You can feel the human devotion and hours of manual stitching in every single seam. The website checkout was seamless and the packaging felt like receiving royal jewellery."
+            </p>
+            <div class="flex items-center gap-3 pt-4 border-t border-stone-100">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=150&q=80" class="w-10 h-10 rounded-full object-cover" alt="Éléonore Dupont" />
+              <div>
+                <h4 class="font-serif font-bold text-xs text-stone-900">Éléonore Dupont</h4>
+                <span class="text-[10px] text-stone-500 uppercase tracking-wider">Paris • Fashion Stylist</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER & NEWSLETTER
+       ========================================================================== -->
+  <footer class="bg-stone-950 text-stone-300 pt-16 pb-12 border-t border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-stone-800">
+        
+        <!-- Brand Summary -->
+        <div class="md:col-span-4 space-y-4">
+          <span class="font-serif text-2xl font-bold tracking-widest uppercase text-white block">Atelier Éléonore</span>
+          <p class="text-xs text-stone-400 leading-relaxed font-light">
+            An independent couture atelier crafting limited-edition handmade garments and bespoke commissions for discerning women worldwide. Dedicated to preserving heirloom artisan skills.
+          </p>
+          <div class="flex gap-4 pt-2 text-stone-400">
+            <a href="#" class="hover:text-[#DFBE7B] transition text-xs font-semibold">Instagram</a>
+            <a href="#" class="hover:text-[#DFBE7B] transition text-xs font-semibold">Pinterest</a>
+            <a href="#" class="hover:text-[#DFBE7B] transition text-xs font-semibold">Vogue Runway</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="md:col-span-2 space-y-2 text-xs">
+          <span class="font-semibold text-white uppercase tracking-wider block mb-3">Collections</span>
+          <a href="#collection" class="block text-stone-400 hover:text-white transition">Couture Gowns</a>
+          <a href="#collection" class="block text-stone-400 hover:text-white transition">Handmade Co-Ords</a>
+          <a href="#collection" class="block text-stone-400 hover:text-white transition">Heirloom Shawls</a>
+          <a href="#bespoke" class="block text-stone-400 hover:text-white transition">Bespoke Fitting</a>
+        </div>
+
+        <div class="md:col-span-2 space-y-2 text-xs">
+          <span class="font-semibold text-white uppercase tracking-wider block mb-3">Atelier Care</span>
+          <a href="#" class="block text-stone-400 hover:text-white transition">Silk Preservation</a>
+          <a href="#" class="block text-stone-400 hover:text-white transition">Made-to-Measure Guide</a>
+          <a href="#" class="block text-stone-400 hover:text-white transition">Insured Global Courier</a>
+          <a href="#" class="block text-stone-400 hover:text-white transition">Certificate of Authenticity</a>
+        </div>
+
+        <!-- Newsletter Sign-up -->
+        <div class="md:col-span-4 space-y-3">
+          <span class="font-semibold text-white uppercase tracking-wider block">Join The Private Atelier Salon</span>
+          <p class="text-xs text-stone-400 font-light">Receive invitations to new collection private previews & receive a 10% privilege code.</p>
+          <form onsubmit="event.preventDefault(); showToast('Welcome to the Atelier Salon! Use code MAISON10 ✨');" class="flex gap-2">
+            <label for="newsletterEmail" class="sr-only">Email</label>
+            <input type="email" id="newsletterEmail" required placeholder="Enter your email" class="bg-stone-900 border border-stone-700 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-[#C5A059] flex-1" />
+            <button type="submit" class="px-4 py-2 bg-[#C5A059] text-stone-950 font-bold text-xs uppercase tracking-wider rounded hover:bg-[#DFBE7B] transition">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-stone-500 gap-4">
+        <div>
+          © 2026 Atelier Éléonore Haute Couture. All rights reserved. Handcrafted with passion.
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-stone-400">Secure Payment Gateways:</span>
+          <span class="px-2 py-0.5 bg-stone-900 border border-stone-800 rounded text-stone-300 font-bold">VISA</span>
+          <span class="px-2 py-0.5 bg-stone-900 border border-stone-800 rounded text-stone-300 font-bold">MC</span>
+          <span class="px-2 py-0.5 bg-stone-900 border border-stone-800 rounded text-stone-300 font-bold">AMEX</span>
+          <span class="px-2 py-0.5 bg-stone-900 border border-stone-800 rounded text-stone-300 font-bold">UPI</span>
+          <span class="px-2 py-0.5 bg-stone-900 border border-stone-800 rounded text-stone-300 font-bold">STRIPE</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SHOPPING BAG / CART SLIDE-OVER DRAWER
+       ========================================================================== -->
+  <div id="cartBackdrop" class="drawer-backdrop"></div>
+  <aside id="cartDrawer" class="cart-drawer" aria-label="Shopping Bag Drawer">
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-stone-200 flex items-center justify-between bg-[#FBF9F5]">
+      <div class="flex items-center gap-2">
+        <h3 class="font-serif text-xl font-semibold text-stone-900">Your Atelier Bag</h3>
+      </div>
+      <button onclick="closeCartDrawer()" class="p-1.5 text-stone-500 hover:text-stone-900 transition" aria-label="Close Bag">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Free Shipping Progress -->
+    <div class="px-5 py-3 bg-[#FAF6F0] border-b border-stone-200 text-xs">
+      <div id="freeShippingText" class="text-stone-700">Add more for Free Courier</div>
+      <div class="shipping-meter">
+        <div id="freeShippingProgress" class="shipping-meter-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Items List -->
+    <div id="cartItemsContainer" class="flex-1 overflow-y-auto">
+      <!-- Items dynamically injected here -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="cartEmptyState" class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center text-stone-400">
+      <svg class="w-12 h-12 text-stone-300 mb-3" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+      </svg>
+      <p class="font-serif text-lg text-stone-700 mb-1">Your bag is empty</p>
+      <p class="text-xs text-stone-500 mb-4">Discover our limited handmade collection and reserve your bespoke piece.</p>
+      <button onclick="closeCartDrawer(); scrollToCollection();" class="btn-primary text-xs py-2 px-4">Browse Creations</button>
+    </div>
+
+    <!-- Drawer Footer (Subtotal & Checkout) -->
+    <div id="cartCheckoutFooter" class="p-5 border-t border-stone-200 bg-[#FBF9F5] space-y-3">
+      <!-- Promo Code -->
+      <div class="flex gap-2">
+        <label for="promoCodeInput" class="sr-only">Promo Code</label>
+        <input type="text" id="promoCodeInput" placeholder="Promo code (e.g. MAISON10)" class="bg-white border border-stone-300 rounded px-3 py-1.5 text-xs uppercase flex-1 focus:outline-none focus:border-[#C5A059]" />
+        <button onclick="applyPromoCode()" class="px-3 py-1.5 bg-stone-900 text-white rounded text-xs font-semibold hover:bg-[#C5A059] hover:text-stone-950 transition">Apply</button>
+      </div>
+
+      <!-- Gift Wrapping Option -->
+      <label class="flex items-center gap-2 cursor-pointer text-xs text-stone-700 pt-1">
+        <input type="checkbox" onchange="toggleGiftWrap(this)" class="rounded text-[#C5A059] focus:ring-0 cursor-pointer" />
+        <span>Add Atelier Luxury Gift Wrapping with Calligraphy Wax Seal Card (+ $10)</span>
+      </label>
+
+      <!-- Cost Breakdown -->
+      <div class="border-t border-stone-200 pt-3 space-y-1 text-xs text-stone-600">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span id="cartSubtotal" class="font-medium text-stone-900">$0</span>
+        </div>
+        <div id="cartDiscountRow" class="hidden flex justify-between text-emerald-700">
+          <span>Privilege Discount</span>
+          <span id="cartDiscountAmount" class="font-medium">-$0</span>
+        </div>
+        <div id="cartGiftWrapRow" class="hidden flex justify-between text-stone-700">
+          <span>Atelier Gift Packaging</span>
+          <span id="cartGiftWrapAmount" class="font-medium">$10</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Insured Courier Delivery</span>
+          <span id="cartShippingAmount" class="font-medium text-stone-900">Calculated at checkout</span>
+        </div>
+        <div class="flex justify-between text-base font-bold text-stone-950 pt-2 border-t border-stone-200">
+          <span>Total</span>
+          <span id="cartTotal" class="text-[#A37F39]">$0</span>
+        </div>
+      </div>
+
+      <button onclick="startCheckout()" class="w-full btn-gold py-3 text-xs tracking-widest font-bold">
+        Proceed to Secure Checkout 🔒
+      </button>
+      <p class="text-[10px] text-center text-stone-500">256-Bit SSL Encrypted • 14-Day Atelier Fit Guarantee</p>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       PRODUCT DETAIL / QUICK VIEW MODAL
+       ========================================================================== -->
+  <div id="modalBackdrop" class="drawer-backdrop"></div>
+  <div id="productDetailModal" class="modal-dialog">
+    <div class="relative p-6 sm:p-8">
+      <!-- Close Button -->
+      <button onclick="closeProductModal()" class="absolute top-5 right-5 p-2 text-stone-400 hover:text-stone-900 transition" aria-label="Close Modal">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <!-- Gallery Left -->
+        <div>
+          <div class="aspect-[3/4] bg-stone-100 rounded overflow-hidden mb-3 border border-stone-200">
+            <img id="modalMainImg" src="" alt="Creation Preview" class="w-full h-full object-cover transition" />
+          </div>
+          <div id="modalThumbnails" class="flex gap-2 overflow-x-auto pb-1">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Details Right -->
+        <div class="space-y-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span id="modalProdBadge" class="text-[10px] font-bold uppercase tracking-wider text-[#A37F39] bg-amber-50 px-2 py-0.5 rounded border border-amber-200"></span>
+              <span id="modalProdHours" class="text-[10px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100"></span>
+            </div>
+            <h2 id="modalProdName" class="font-serif text-2xl sm:text-3xl font-semibold text-stone-950"></h2>
+            <p id="modalProdSubtitle" class="text-xs text-stone-500 italic mt-0.5 font-light"></p>
+            <div class="flex items-center gap-3 mt-2">
+              <span id="modalProdPrice" class="font-serif text-2xl font-bold text-stone-900"></span>
+              <span id="modalProdRating" class="text-xs text-[#C5A059] font-medium"></span>
+            </div>
+          </div>
+
+          <p id="modalProdDesc" class="text-xs text-stone-600 leading-relaxed font-light"></p>
+
+          <!-- Specifications -->
+          <div class="border-t border-b border-stone-200 py-3 space-y-1.5 text-xs">
+            <div class="flex justify-between">
+              <span class="text-stone-500">Fabric Composition:</span>
+              <strong id="modalProdFabric" class="text-stone-900 font-medium"></strong>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-stone-500">Artisan Shade:</span>
+              <strong id="modalProdColor" class="text-stone-900 font-medium"></strong>
+            </div>
+          </div>
+
+          <!-- Size Selector -->
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-stone-800">Select Size:</span>
+              <span class="text-[11px] text-[#A37F39] cursor-pointer hover:underline font-medium">Free Made-to-Measure Available</span>
+            </div>
+            <div id="modalSizeOptions" class="flex flex-wrap gap-2">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+
+          <!-- Custom Fit Measurement Inputs (Revealed when "Custom Fit" is selected) -->
+          <div id="customFitMeasurementsBox" class="hidden p-3 bg-amber-50/70 border border-amber-200 rounded text-xs space-y-2">
+            <div class="flex items-center gap-1.5 text-amber-900 font-semibold">
+              <span>🪡</span>
+              <span>Complimentary Made-to-Measure Tailoring</span>
+            </div>
+            <p class="text-[11px] text-amber-800 leading-tight">Enter your measurements (in cm or inches). The designer will tailor the piece specifically to your body.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-stone-700" for="fitBust">Bust</label>
+                <input type="text" id="fitBust" placeholder="e.g. 34 in / 86 cm" class="w-full bg-white border border-stone-300 rounded px-2 py-1 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-stone-700" for="fitWaist">Waist</label>
+                <input type="text" id="fitWaist" placeholder="e.g. 27 in / 68 cm" class="w-full bg-white border border-stone-300 rounded px-2 py-1 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-stone-700" for="fitHips">Hips</label>
+                <input type="text" id="fitHips" placeholder="e.g. 38 in / 96 cm" class="w-full bg-white border border-stone-300 rounded px-2 py-1 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-stone-700" for="fitHeight">Height</label>
+                <input type="text" id="fitHeight" placeholder="e.g. 5'7 / 170 cm" class="w-full bg-white border border-stone-300 rounded px-2 py-1 text-xs" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Quantity & Action -->
+          <div class="flex gap-3 pt-2">
+            <div class="w-20">
+              <label for="modalQty" class="sr-only">Quantity</label>
+              <input type="number" id="modalQty" min="1" max="10" value="1" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-center text-xs font-semibold focus:outline-none" />
+            </div>
+            <button onclick="addCurrentModalToCart()" class="flex-1 btn-gold py-2.5 text-xs font-bold tracking-wider">
+              Add to Bag & Reserve
+            </button>
+          </div>
+
+          <!-- Craftsmanship highlights -->
+          <div class="pt-2">
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-stone-800 block mb-1">Handmade Highlights:</span>
+            <ul id="modalCraftsmanship" class="space-y-1">
+              <!-- Injected dynamically -->
+            </ul>
+          </div>
+
+          <!-- Care guide note -->
+          <div class="text-[11px] text-stone-500 pt-1">
+            <strong>Care: </strong><span id="modalProdCare"></span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CHECKOUT & PAYMENT MODAL (MULTI-STEP INTEGRATED SYSTEM)
+       ========================================================================== -->
+  <div id="checkoutModal" class="modal-dialog max-w-2xl">
+    <div class="p-6 sm:p-8">
+      <!-- Checkout Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-stone-200 mb-6">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest text-[#A37F39] font-bold block">Encrypted Atelier Gateway</span>
+          <h3 class="font-serif text-2xl font-semibold text-stone-900">Secure Checkout</h3>
+        </div>
+        <button onclick="closeCheckoutModal()" class="text-stone-400 hover:text-stone-900 transition" aria-label="Close Checkout">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Steps Indicator -->
+      <div class="flex items-center justify-between mb-8 max-w-sm mx-auto">
+        <div class="flex items-center gap-2">
+          <span id="stepPill1" class="checkout-step-pill active">1</span>
+          <span class="text-xs font-semibold text-stone-700">Shipping</span>
+        </div>
+        <div class="h-0.5 w-8 bg-stone-300"></div>
+        <div class="flex items-center gap-2">
+          <span id="stepPill2" class="checkout-step-pill">2</span>
+          <span class="text-xs font-semibold text-stone-700">Courier</span>
+        </div>
+        <div class="h-0.5 w-8 bg-stone-300"></div>
+        <div class="flex items-center gap-2">
+          <span id="stepPill3" class="checkout-step-pill">3</span>
+          <span class="text-xs font-semibold text-stone-700">Payment</span>
+        </div>
+      </div>
+
+      <!-- Step 1: Shipping Details -->
+      <div id="checkoutStep1" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="shipName">Full Name *</label>
+            <input type="text" id="shipName" placeholder="Lady Eleanor Vance" value="Eleanor Vance" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="shipEmail">Email for Order & Tracking *</label>
+            <input type="email" id="shipEmail" placeholder="eleanor@vance.com" value="eleanor@vance.com" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="shipAddress">Street Address *</label>
+          <input type="text" id="shipAddress" placeholder="742 Evergreen Promenade, Suite 4B" value="742 Evergreen Promenade" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="shipCity">City *</label>
+            <input type="text" id="shipCity" placeholder="New York" value="New York" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="shipZip">ZIP / Postal Code *</label>
+            <input type="text" id="shipZip" placeholder="10021" value="10021" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="shipCountry">Country</label>
+            <select id="shipCountry" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-2.5 py-2 text-xs focus:outline-none focus:border-[#C5A059]">
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="France">France</option>
+              <option value="India">India</option>
+              <option value="United Arab Emirates">UAE</option>
+              <option value="Canada">Canada</option>
+              <option value="Australia">Australia</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="shipPhone">Phone (for Courier Updates)</label>
+          <input type="tel" id="shipPhone" placeholder="+1 (555) 234-5678" value="+1 (555) 234-5678" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+        </div>
+      </div>
+
+      <!-- Step 2: Shipping Method -->
+      <div id="checkoutStep2" class="hidden space-y-4">
+        <label class="border border-stone-300 hover:border-stone-900 rounded p-4 flex items-center justify-between cursor-pointer transition block">
+          <div class="flex items-center gap-3">
+            <input type="radio" name="shipping_method" value="standard" checked class="text-stone-900 focus:ring-0" />
+            <div>
+              <strong class="text-xs font-semibold text-stone-900 block">Insured Standard Courier (Hand-Packaged)</strong>
+              <span class="text-[11px] text-stone-500">Delivered in 5-7 business days with signature required</span>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">Complimentary</span>
+        </label>
+
+        <label class="border border-stone-300 hover:border-stone-900 rounded p-4 flex items-center justify-between cursor-pointer transition block">
+          <div class="flex items-center gap-3">
+            <input type="radio" name="shipping_method" value="express" class="text-stone-900 focus:ring-0" />
+            <div>
+              <strong class="text-xs font-semibold text-stone-900 block">White-Glove Priority Express Air</strong>
+              <span class="text-[11px] text-stone-500">Delivered in 2-3 business days in solid cedarwood preservation box</span>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-stone-900">+ $45</span>
+        </label>
+      </div>
+
+      <!-- Step 3: Online Payment Methods -->
+      <div id="checkoutStep3" class="hidden space-y-5">
+        <!-- Payment Tabs -->
+        <div class="grid grid-cols-3 gap-2">
+          <button type="button" onclick="selectPaymentMethod('card')" data-method="card" class="payment-method-tab border-2 border-stone-900 bg-stone-50 p-3 rounded text-center transition">
+            <span class="text-xs font-bold block text-stone-900">💳 Card</span>
+            <span class="text-[10px] text-stone-500">Visa / MC / Amex</span>
+          </button>
+          <button type="button" onclick="selectPaymentMethod('upi')" data-method="upi" class="payment-method-tab border-2 border-stone-200 p-3 rounded text-center transition">
+            <span class="text-xs font-bold block text-stone-900">⚡ UPI / QR</span>
+            <span class="text-[10px] text-stone-500">GPay, PhonePe</span>
+          </button>
+          <button type="button" onclick="selectPaymentMethod('paypal')" data-method="paypal" class="payment-method-tab border-2 border-stone-200 p-3 rounded text-center transition">
+            <span class="text-xs font-bold block text-stone-900">🅿️ PayPal</span>
+            <span class="text-[10px] text-stone-500">1-Click Express</span>
+          </button>
+        </div>
+
+        <!-- 1. Credit Card Option -->
+        <div id="cardPaymentFields" class="space-y-4">
+          <!-- Interactive Card Visual Mockup -->
+          <div class="mock-credit-card">
+            <div class="flex justify-between items-start mb-6">
+              <div class="card-chip"></div>
+              <span class="font-serif italic text-xs tracking-wider text-[#DFBE7B]">ATELIER PLATINUM</span>
+            </div>
+            <div id="cardDisplayNum" class="font-mono text-base tracking-widest mb-4">4532 •••• •••• 8921</div>
+            <div class="flex justify-between items-end text-xs">
+              <div>
+                <span class="text-[9px] uppercase tracking-wider text-stone-400 block">Cardholder</span>
+                <span id="cardDisplayName" class="font-medium tracking-wide">ELEANOR VANCE</span>
+              </div>
+              <div>
+                <span class="text-[9px] uppercase tracking-wider text-stone-400 block">Expires</span>
+                <span id="cardDisplayExp" class="font-mono font-medium">12/28</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Form Inputs -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="ccNumber">Card Number</label>
+            <input type="text" id="ccNumber" placeholder="4532 8841 9021 8921" value="4532 8841 9021 8921" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs font-mono focus:outline-none focus:border-[#C5A059]" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="ccName">Name on Card</label>
+              <input type="text" id="ccName" placeholder="Eleanor Vance" value="Eleanor Vance" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A059]" />
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="ccExpiry">MM/YY</label>
+                <input type="text" id="ccExpiry" placeholder="12/28" value="12/28" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-2 py-2 text-xs font-mono text-center focus:outline-none focus:border-[#C5A059]" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1" for="ccCvv">CVV</label>
+                <input type="password" id="ccCvv" maxlength="4" placeholder="842" value="842" class="w-full bg-[#FBF9F5] border border-stone-300 rounded px-2 py-2 text-xs font-mono text-center focus:outline-none focus:border-[#C5A059]" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. UPI / QR Option -->
+        <div id="upiPaymentFields" class="hidden text-center p-6 bg-stone-50 border border-stone-200 rounded">
+          <span class="text-xs font-semibold text-stone-800 block mb-2">Scan & Pay via any UPI App</span>
+          <div class="w-36 h-36 bg-white p-2 border-2 border-stone-300 rounded mx-auto mb-3 shadow-inner flex items-center justify-center">
+            <!-- Simulated QR Pattern -->
+            <div class="grid grid-cols-6 gap-1 w-28 h-28">
+              <div class="bg-black"></div><div class="bg-black"></div><div class="bg-black"></div><div class="bg-white"></div><div class="bg-black"></div><div class="bg-black"></div>
+              <div class="bg-black"></div><div class="bg-white"></div><div class="bg-black"></div><div class="bg-black"></div><div class="bg-white"></div><div class="bg-black"></div>
+              <div class="bg-black"></div><div class="bg-black"></div><div class="bg-black"></div><div class="bg-white"></div><div class="bg-black"></div><div class="bg-black"></div>
+              <div class="bg-white"></div><div class="bg-black"></div><div class="bg-white"></div><div class="bg-black"></div><div class="bg-white"></div><div class="bg-white"></div>
+              <div class="bg-black"></div><div class="bg-black"></div><div class="bg-white"></div><div class="bg-black"></div><div class="bg-black"></div><div class="bg-black"></div>
+              <div class="bg-black"></div><div class="bg-white"></div><div class="bg-black"></div><div class="bg-black"></div><div class="bg-black"></div><div class="bg-black"></div>
+            </div>
+          </div>
+          <p class="text-xs text-stone-500">UPI ID: <strong>atelier.couture@okaxis</strong></p>
+          <div class="flex justify-center gap-3 mt-3 text-xs text-stone-600 font-semibold">
+            <span>Google Pay</span> • <span>PhonePe</span> • <span>Paytm</span>
+          </div>
+        </div>
+
+        <!-- 3. PayPal Option -->
+        <div id="paypalPaymentFields" class="hidden text-center p-6 bg-stone-50 border border-stone-200 rounded">
+          <p class="text-xs text-stone-600 mb-4">Click below to authenticate with PayPal Express Checkout.</p>
+          <button type="button" onclick="processPayment()" class="px-8 py-3 bg-[#FFC439] hover:bg-[#F2BA36] text-stone-900 font-bold rounded-full text-xs uppercase tracking-wider transition shadow">
+            Pay with <strong>PayPal</strong>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Order Summary Card in Checkout -->
+      <div id="checkoutItemsSummary" class="mt-6 p-4 bg-[#FBF9F5] border border-stone-200 rounded">
+        <!-- Injected via updateCheckoutSummary() -->
+      </div>
+
+      <!-- Navigation & Action Buttons -->
+      <div class="mt-6 pt-4 border-t border-stone-200 flex justify-between items-center">
+        <button id="checkoutBackBtn" onclick="prevCheckoutStep()" class="btn-secondary text-xs py-2.5 px-4 hidden">
+          ← Back
+        </button>
+        <div class="flex-1"></div>
+        <button id="checkoutNextBtn" onclick="nextCheckoutStep()" class="btn-primary text-xs py-2.5 px-6">
+          Continue to Courier →
+        </button>
+        <button id="checkoutPayBtn" onclick="processPayment()" class="btn-gold text-xs py-3 px-8 hidden">
+          Authorize & Pay <span id="checkoutPayBtnAmount" class="ml-1"></span> 🔒
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PAYMENT PROCESSING SIMULATION OVERLAY
+       ========================================================================== -->
+  <div id="paymentProcessingOverlay" class="hidden fixed inset-0 bg-stone-950/80 backdrop-blur-md z-[150] flex flex-col items-center justify-center text-white p-6">
+    <div class="w-16 h-16 border-4 border-[#C5A059] border-t-transparent rounded-full animate-spin mb-6"></div>
+    <h3 class="font-serif text-2xl font-bold tracking-wider mb-2">Processing Couture Transaction</h3>
+    <p id="paymentProcessingStatus" class="text-xs text-[#DFBE7B] font-mono tracking-wide text-center">Connecting to 256-Bit SSL Gateway...</p>
+    <div class="mt-6 flex items-center gap-2 text-[10px] text-stone-400 uppercase tracking-widest">
+      <span>🛡️ PCI-DSS Level 1 Compliant</span> • <span>3D Secure 2.0</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       ORDER RECEIPT & INVOICE CONFIRMATION MODAL
+       ========================================================================== -->
+  <div id="receiptModal" class="modal-dialog max-w-xl">
+    <div class="p-6 sm:p-8">
+      <div class="text-center pb-6 border-b border-stone-200">
+        <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-800 mx-auto flex items-center justify-center mb-3">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+        </div>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-[#A37F39]">Payment Verified & Captured</span>
+        <h2 class="font-serif text-3xl font-semibold text-stone-950 mt-1">Thank You for Your Patronage</h2>
+        <p class="text-xs text-stone-500 mt-1">Your order has been officially recorded in our atelier studio log.</p>
+      </div>
+
+      <!-- Receipt Content -->
+      <div class="py-4 space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3 bg-[#FBF9F5] p-3 rounded border border-stone-200">
+          <div>
+            <span class="text-stone-400 uppercase text-[10px] block">Order Number</span>
+            <strong id="receiptOrderNum" class="text-stone-900 font-mono"></strong>
+          </div>
+          <div>
+            <span class="text-stone-400 uppercase text-[10px] block">Date</span>
+            <span id="receiptDate" class="text-stone-800 font-medium"></span>
+          </div>
+          <div>
+            <span class="text-stone-400 uppercase text-[10px] block">Patron</span>
+            <strong id="receiptCustomer" class="text-stone-900"></strong>
+          </div>
+          <div>
+            <span class="text-stone-400 uppercase text-[10px] block">Delivery Estimate</span>
+            <span id="receiptDeliveryEst" class="text-emerald-700 font-bold"></span>
+          </div>
+        </div>
+
+        <div class="text-stone-600">
+          <span class="text-stone-400 text-[10px] uppercase block">Shipping To</span>
+          <span id="receiptAddress" class="text-xs"></span>
+          <span id="receiptEmail" class="block text-stone-400 text-[11px]"></span>
+        </div>
+
+        <!-- Order Items -->
+        <div class="pt-2">
+          <span class="text-stone-400 text-[10px] uppercase font-bold block mb-1">Handcrafted Pieces</span>
+          <div id="receiptItems"></div>
+        </div>
+
+        <div class="flex justify-between items-center pt-3 border-t border-stone-200 text-sm font-bold text-stone-900">
+          <span>Amount Paid (<span id="receiptMethod"></span>):</span>
+          <span id="receiptTotal" class="text-xl text-[#A37F39]"></span>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-stone-200 flex gap-3">
+        <button onclick="printReceipt()" class="btn-secondary text-xs py-2.5 flex-1">
+          🖨️ Print / Save Receipt
+        </button>
+        <button onclick="closeReceiptModal()" class="btn-primary text-xs py-2.5 flex-1">
+          Continue Exploring
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       DESIGNER STUDIO (SISTER'S ADMIN CONTROLLER)
+       ========================================================================== -->
+  <div id="designerStudioModal" class="modal-dialog max-w-2xl">
+    <div class="p-6 sm:p-8">
+      <div class="flex items-center justify-between pb-4 border-b border-stone-200 mb-6">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest text-[#A37F39] font-bold block">Sister's Backstage Studio</span>
+          <h3 class="font-serif text-2xl font-semibold text-stone-900">👑 Designer Management Panel</h3>
+        </div>
+        <button onclick="closeDesignerStudio()" class="text-stone-400 hover:text-stone-900 transition" aria-label="Close Studio">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Sister Action 1: Add New Creation -->
+        <div class="bg-[#FBF9F5] p-5 rounded border border-stone-200">
+          <h4 class="font-serif text-lg font-semibold text-stone-900 mb-1">Add a New Handmade Creation</h4>
+          <p class="text-xs text-stone-500 mb-4">Easily upload a new piece to test your shop catalog.</p>
+
+          <form onsubmit="addNewCreation(event)" class="space-y-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-semibold uppercase text-stone-700 mb-1" for="newProdName">Creation Name *</label>
+                <input type="text" id="newProdName" required placeholder="e.g. Celestial Velvet Kaftan" class="w-full bg-white border border-stone-300 rounded px-2.5 py-1.5 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold uppercase text-stone-700 mb-1" for="newProdCat">Category *</label>
+                <select id="newProdCat" class="w-full bg-white border border-stone-300 rounded px-2.5 py-1.5 text-xs">
+                  <option>Couture Gowns</option>
+                  <option>Co-Ords & Sets</option>
+                  <option>Outerwear & Jackets</option>
+                  <option>Scarves & Shawls</option>
+                  <option>Accessories</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] font-semibold uppercase text-stone-700 mb-1" for="newProdPrice">Price in USD ($) *</label>
+                <input type="number" id="newProdPrice" required placeholder="280" class="w-full bg-white border border-stone-300 rounded px-2.5 py-1.5 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold uppercase text-stone-700 mb-1" for="newProdFabric">Fabric Type *</label>
+                <input type="text" id="newProdFabric" required placeholder="e.g. Handwoven Chiffon" class="w-full bg-white border border-stone-300 rounded px-2.5 py-1.5 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold uppercase text-stone-700 mb-1" for="newProdHours">Artisan Craft Hours</label>
+                <input type="text" id="newProdHours" placeholder="32 Hours Handwork" class="w-full bg-white border border-stone-300 rounded px-2.5 py-1.5 text-xs" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold uppercase text-stone-700 mb-1" for="newProdImg">Photo URL (Unsplash or image link)</label>
+              <input type="url" id="newProdImg" placeholder="https://images.unsplash.com/photo-..." class="w-full bg-white border border-stone-300 rounded px-2.5 py-1.5 text-xs" />
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold uppercase text-stone-700 mb-1" for="newProdDesc">Description & Craft Notes</label>
+              <textarea id="newProdDesc" rows="2" placeholder="Hand-stitched detailing, made to order..." class="w-full bg-white border border-stone-300 rounded px-2.5 py-1.5 text-xs"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary text-xs py-2 px-5">Publish to Catalog ✨</button>
+          </form>
+        </div>
+
+        <!-- Sister Action 2: Live Orders Placed in Demo -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <h4 class="font-serif text-lg font-semibold text-stone-900">Received Customer Orders</h4>
+            <span class="text-xs text-stone-500">Live test orders placed on this browser</span>
+          </div>
+          <div id="designerOrdersList" class="space-y-2 max-h-56 overflow-y-auto">
+            <!-- Injected via renderDesignerOrdersList() -->
+          </div>
+        </div>
+
+        <!-- Reset Button -->
+        <div class="pt-4 border-t border-stone-200 flex justify-between items-center">
+          <span class="text-[11px] text-stone-400">Need to restore default products?</span>
+          <button onclick="resetAllDemoData()" class="text-xs text-red-700 hover:underline">Reset Demo Data</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Quick Designer Mode Launcher -->
+  <button onclick="openDesignerStudio()" class="designer-mode-badge" title="Open Sister's Designer Studio">
+    <span>👑</span>
+    <span>Designer Mode</span>
+  </button>
+
+  <!-- Global Toast Alerts Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Auxiliary UI Helpers -->
+  <script>
+    function toggleMobileNav() {
+      const menu = document.getElementById("mobileNavMenu");
+      if (menu) menu.classList.toggle("hidden");
+    }
+    function scrollToCollection() {
+      const el = document.getElementById("collection");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
+
+  <!-- Scripts -->
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
